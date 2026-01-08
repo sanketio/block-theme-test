@@ -1,0 +1,69 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "A starter theme that facilitates a quick head start for developing new block-based themes along with a bunch of developer-friendly features.",
+  "private": true,
+  "author": "rtCamp",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "rtcamp",
+    "wp-theme",
+    "block-theme"
+  ],
+  "homepage": "https://github.com/rtCamp/theme-elementary#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rtCamp/theme-elementary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rtCamp/theme-elementary/issues"
+  },
+  "dependencies": {
+    "@wordpress/interactivity": "^5.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.25.2",
+    "@wordpress/babel-preset-default": "8.15.1",
+    "@wordpress/browserslist-config": "6.15.0",
+    "@wordpress/env": "10.15.0",
+    "@wordpress/eslint-plugin": "22.1.1",
+    "@wordpress/jest-preset-default": "12.15.1",
+    "@wordpress/scripts": "30.8.1",
+    "browserslist": "4.24.3",
+    "cross-env": "7.0.3",
+    "css-minimizer-webpack-plugin": "7.0.0",
+    "eslint": "8.56.0",
+    "eslint-plugin-eslint-comments": "3.2.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jest": "28.6.0",
+    "husky": "9.0.1",
+    "jest-silent-reporter": "0.6.0",
+    "lint-staged": "15.3.0",
+    "npm-run-all": "4.1.5",
+    "webpack-remove-empty-scripts": "1.0.4"
+  },
+  "scripts": {
+    "build:dev": "cross-env NODE_ENV=development npm-run-all 'build:!(dev|prod)'",
+    "build:prod": "cross-env NODE_ENV=production npm-run-all 'build:!(dev|prod)'",
+    "build:js": "wp-scripts build --experimental-modules",
+    "lint:all": "npm-run-all --parallel lint:*",
+    "lint:css": "wp-scripts lint-style ./assets/src",
+    "lint:css:fix": "npm run lint:css -- --fix ./assets/src",
+    "lint:js": "wp-scripts lint-js ./assets/src",
+    "lint:js:fix": "npm run lint:js -- --fix ./assets/src",
+    "lint:js:report": "npm run lint:js -- --output-file lint-js-report.json --format json .",
+    "lint:php": "php vendor/bin/phpcs",
+    "lint:php:fix": "node ./bin/phpcbf.js",
+    "lint:package-json": "wp-scripts lint-pkg-json --ignorePath .gitignore",
+    "lint:staged": "lint-staged",
+    "prepare": "husky",
+    "start": "wp-scripts start --experimental-modules",
+    "test": "npm-run-all --parallel test:*",
+    "test:js": "wp-scripts test-unit-js --config=tests/js/jest.config.js --passWithNoTests",
+    "test:js:watch": "npm run test:js -- --watch",
+    "pretest:php": "wp-env run cli --env-cwd=/var/www/html/wp-content/themes/$(basename $(pwd)) composer install --no-interaction --no-scripts",
+    "test:php": "wp-env run cli --env-cwd=/var/www/html/wp-content/themes/$(basename $(pwd)) composer exec 'phpunit --do-not-cache-result --verbose'",
+    "wp-env": "wp-env",
+    "pot": "composer run pot"
+  }
+}
